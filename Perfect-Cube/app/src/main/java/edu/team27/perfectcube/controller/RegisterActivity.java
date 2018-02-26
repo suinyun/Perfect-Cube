@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import edu.team27.perfectcube.R;
 import edu.team27.perfectcube.model.LoginData;
+import edu.team27.perfectcube.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
 

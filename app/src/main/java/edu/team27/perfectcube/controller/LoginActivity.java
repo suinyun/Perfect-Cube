@@ -50,9 +50,9 @@ public class LoginActivity extends AppCompatActivity {
                 String tryPass = password.getText().toString();
 
                 ArrayList<String> users = new ArrayList<>();
-                users.add("user");
+                users.add(tryUser);
                 ArrayList<String> passwords = new ArrayList<>();
-                passwords.add("pass");
+                passwords.add(tryPass);
 
 
                 //ArrayList<String> users = LoginData.getUsers();

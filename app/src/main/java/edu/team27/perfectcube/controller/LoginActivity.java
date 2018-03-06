@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (passwords.get(idx).equals(tryPass)) {
                             //login is successful
                             LoginData current = new LoginData(tryUser);
-                            Intent intent = new Intent(a, FakeAppActivity.class);
+                            Intent intent = new Intent(a, MainActivity.class);
                             startActivity(intent);
                         } else {
                             //incorrect password

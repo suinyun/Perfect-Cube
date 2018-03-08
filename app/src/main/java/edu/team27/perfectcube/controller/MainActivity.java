@@ -24,26 +24,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        List<ShelterInfo> input = readCSV();
+
         setContentView(R.layout.activity_main);
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        recyclerView = findViewById(R.id.my_recycler_view);
 
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        List<ShelterInfo> input  = new ArrayList<>();
-
         theAdapter = new Adapter(input);
         recyclerView.setAdapter(theAdapter);
-        readCSV();
+
     }
 
-    private void readCSV() {
+    private List<ShelterInfo> readCSV() {
         List<ShelterInfo> data = new ArrayList<>();
 
         try {
             InputStreamReader inputStream = new InputStreamReader(getAssets()
-                    .open("Homeless Shelter Database.csv"));
+                    .open("homeless_shelter_database.csv"));
             BufferedReader bufferedReader = new BufferedReader(inputStream);
 
             String line;
@@ -52,14 +53,16 @@ public class MainActivity extends AppCompatActivity {
             int index = 0;
             while (line != null) {
                 String[] lines = line.split(",");
-                data.add(index, new ShelterInfo(lines[1], Integer.parseInt
+                data.add(index, new ShelterInfo(lines[1],
                         (lines[2]), lines[3], lines[6], lines[8]));
             }
             bufferedReader.close();
-            theAdapter.setValues(data);
+            theAdapter.setShelters(data);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+        return data;
     }
 
 }

@@ -7,12 +7,12 @@ package edu.team27.perfectcube.model;
 public class ShelterInfo {
 
     private String shelterName;
-    private int capacity;
+    private String capacity;
     private String gender;
     private String address;
     private String phoneNumber;
 
-    public ShelterInfo(String shelterName, int capacity, String gender, String
+    public ShelterInfo(String shelterName, String capacity, String gender, String
                        address, String phoneNumber) {
         this.shelterName = shelterName;
         this.capacity = capacity;
@@ -22,14 +22,14 @@ public class ShelterInfo {
     }
 
     public String toString() {
-        return this.shelterName + "(" + this.phoneNumber + ")";
+        return this.shelterName;
     }
 
     public String getShelterName() {
         return this.shelterName;
     }
 
-    public int getCapacity() {
+    public String getCapacity() {
         return this.capacity;
     }
 

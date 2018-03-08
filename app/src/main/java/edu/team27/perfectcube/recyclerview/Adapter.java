@@ -14,38 +14,36 @@ import edu.team27.perfectcube.R;
 import edu.team27.perfectcube.model.ShelterInfo;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
-    private List<ShelterInfo> values;
+    private List<ShelterInfo> shelters;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView txtHeader;
-        public TextView txtFooter;
+        public TextView firstLine;
         public View layout;
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
-            txtHeader = (TextView) v.findViewById(R.id.firstLine);
-            txtFooter = (TextView) v.findViewById(R.id.secondLine);
+            firstLine = (TextView) v.findViewById(R.id.firstLine);
         }
     }
 
-    public void add(int position, ShelterInfo item) {
-        values.add(position, item);
+    public void insert(int position, ShelterInfo item) {
+        shelters.add(position, item);
         notifyItemInserted(position);
     }
 
     public void remove(int position) {
-        values.remove(position);
+        shelters.remove(position);
         notifyItemRemoved(position);
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public Adapter(List<ShelterInfo> myDataset) {
-        values = myDataset;
+        shelters = myDataset;
     }
 
 
@@ -53,10 +51,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public Adapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
         // create a new view
-        LayoutInflater inflater = LayoutInflater.from(
-                parent.getContext());
-        View v =
-                inflater.inflate(R.layout.row_layout, parent, false);
+        View v = LayoutInflater.from(
+                parent.getContext()).inflate(R.layout.row_layout,
+                parent, false);
         // set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -67,32 +64,30 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        final String name = values.get(position).toString();
-        holder.txtHeader.setText(name);
-        holder.txtHeader.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                remove(position);
-            }
-        });
+        final String name = shelters.get(position).toString();
+        holder.firstLine.setText(name);
 
-        holder.txtFooter.setText("Footer: " + name);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return values.size();
+        return shelters.size();
     }
 
-    public List<ShelterInfo> getValues() {
-        return this.values;
+    public List<ShelterInfo> getShelters() {
+        return this.shelters;
     }
 
-    public void setValues(List<ShelterInfo> list) {
-        values.clear();
-        values.addAll(list);
+    public void setShelters(List<ShelterInfo> list) {
+        shelters.clear();
+        shelters.addAll(list);
         notifyDataSetChanged();
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
     }
 
 }

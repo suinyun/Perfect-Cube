@@ -29,7 +29,7 @@ public class ListActivity extends Activity {
         //Reading the CSV
         InputStream inputStream = getResources().openRawResource(R.raw.data);
         CsvFileReader csvFile = new CsvFileReader(inputStream);
-        List<ShelterInfo> shelterlist = csvFile.read();
+        final List<ShelterInfo> shelterlist = csvFile.read();
 
         //adding shelter names to the array list
         List<String> namelist = new ArrayList<>();
@@ -52,15 +52,22 @@ public class ListActivity extends Activity {
                                     int position, long id) {
 
                 // selected item
-                String name = ((TextView) view).getText().toString();
+                ShelterInfo selected = shelterlist.get(position);
 
                 // Launching new Activity on selecting single List Item
                 Intent i = new Intent(getApplicationContext(), SingleListItem.class);
-                // sending data to new activity
-                i.putExtra("Name", name);
-                startActivity(i);
 
+                // sending data to new activity
+                i.putExtra("Name", "\n" + selected.getShelterName() + "\n");
+                i.putExtra("Capacity", "Vacancies: " + selected.getCapacity());
+                i.putExtra("Demographic Restrictions", "Accepting: " + selected.getGender());
+                i.putExtra("Address", selected.getAddress());
+                i.putExtra("Phone Number", selected.getPhoneNumber());
+
+                startActivity(i);
             }
         });
+
+
     }
 }

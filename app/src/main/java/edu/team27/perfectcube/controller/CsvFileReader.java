@@ -2,7 +2,6 @@ package edu.team27.perfectcube.controller;
 
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,19 +32,20 @@ public class CsvFileReader {
             String line = fileReader.readLine(); //first line
             line = fileReader.readLine(); //second line
 
-            //Read the CSV file header to skip it
-            //fileReader.readLine();
-
             //Read the file line by line starting from the second line\
             while (line != null) {
 
                 //Get all tokens available in line
+
+                String secondline = line;
                 String[] tokens = line.split(",");
+                String[] address = secondline.split("\"");
                 if (tokens.length > 0) {
 
                     //Create a new student object and fill his  data
                     ShelterInfo shelter = new ShelterInfo(tokens[1], tokens[2],
-                            tokens[3], tokens[6], tokens[8]);
+                            tokens[3], address[1], //(tokens[6] + "\n" + tokens[7] + tokens[8]),
+                            tokens[tokens.length - 1]);
                     shelters.add(shelter);
                 }
                 line = fileReader.readLine();

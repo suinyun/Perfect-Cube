@@ -3,6 +3,10 @@ package edu.team27.perfectcube.controller;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import edu.team27.perfectcube.R;
@@ -12,6 +16,9 @@ import edu.team27.perfectcube.R;
  */
 
 public class SingleListItem extends Activity {
+
+    Button gobackButton;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +45,18 @@ public class SingleListItem extends Activity {
         txtg.setText(gender);
         txta.setText(address);
         txtpn.setText(phone);
+
+        gobackButton = findViewById(R.id.gobackButton);
+
+        gobackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
 
     }
 }

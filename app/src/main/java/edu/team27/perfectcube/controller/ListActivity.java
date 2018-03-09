@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class ListActivity extends Activity {
 
     private ListView lv;
     private ListAdapter adapter;
+    Button logoutButton;
 
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -62,9 +64,20 @@ public class ListActivity extends Activity {
                 i.putExtra("Capacity", "Vacancies: " + selected.getCapacity());
                 i.putExtra("Demographic Restrictions", "Accepting: " + selected.getGender());
                 i.putExtra("Address", selected.getAddress());
-                i.putExtra("Phone Number", selected.getPhoneNumber());
+                i.putExtra("Phone Number", selected.getPhoneNumber() + "\n\n");
 
                 startActivity(i);
+            }
+        });
+
+        logoutButton = findViewById(R.id.logoutButton);
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
+                startActivity(intent);
+
             }
         });
 

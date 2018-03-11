@@ -21,6 +21,7 @@ public class ListActivity extends Activity {
     private ListView lv;
     private ListAdapter adapter;
     Button logoutButton;
+    Button searchButton;
 
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -76,6 +77,17 @@ public class ListActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        searchButton = findViewById(R.id.searchButton);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
                 startActivity(intent);
 
             }

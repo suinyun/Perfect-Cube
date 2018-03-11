@@ -13,7 +13,14 @@
         android:id="@+id/logoutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/list_view"
+        android:layout_below="@+id/searchButton"
         android:text="Logout" />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_view"
+        android:text="Search" />
 
 </RelativeLayout>

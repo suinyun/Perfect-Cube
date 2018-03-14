@@ -21,17 +21,15 @@ public class SearchActivity extends Activity {
     Spinner genderSpinner;
     Spinner ageSpinner;
     Button searchButton;
+    EditText simpleEditText;
 
-    String filterGender;
-    String filterAge;
-    String filterName;
+    public String filterGender;
+    public String filterAge;
+    public String filterName;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
-        EditText simpleEditText = (EditText) findViewById(R.id.name_entry);
-        filterName = simpleEditText.getText().toString();
 
         genderSpinner = findViewById(R.id.gender_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -89,7 +87,22 @@ public class SearchActivity extends Activity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                simpleEditText = findViewById(R.id.nameEntry);
+                if (simpleEditText.getText().toString().isEmpty()) {
+                    filterName = "";
+                } else {
+                    filterName = simpleEditText.getText().toString();
+                }
+
                 Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("gender", filterGender);
+                extras.putString("age", filterAge);
+                extras.putString("name", filterName);
+
+                // add bundle to intent
+                intent.putExtras(extras);
                 startActivity(intent);
 
             }

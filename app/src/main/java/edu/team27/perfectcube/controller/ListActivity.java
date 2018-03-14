@@ -29,10 +29,60 @@ public class ListActivity extends Activity {
 
         lv = findViewById(R.id.list_view);
 
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        String filterG = bundle.getString("gender");
+        String filterA = bundle.getString("age");
+        String filterN = bundle.getString("name");
+
         //Reading the CSV
         InputStream inputStream = getResources().openRawResource(R.raw.data);
         CsvFileReader csvFile = new CsvFileReader(inputStream);
-        final List<ShelterInfo> shelterlist = csvFile.read();
+        List<ShelterInfo> rawShelterList = csvFile.read();
+        List<ShelterInfo> filteredList = new ArrayList<>();
+
+        for (int i = 0; i < rawShelterList.size(); i++) {
+
+            boolean addShelter = true;
+
+            if (filterG.equals("Male")) {
+                if (rawShelterList.get(i).getGender().contains("Women")) {
+                    addShelter = false;
+                }
+            } else if (filterG.equals("Female")) {
+                if (rawShelterList.get(i).getGender().contains("Men")) {
+                    addShelter = false;
+                }
+            }
+
+            if (filterA.equals("Families with Newborns")) {
+                if (!rawShelterList.get(i).getGender().contains("ewborn") && !rawShelterList.get(i).getGender().contains("nyone")) {
+                    addShelter = false;
+                }
+            } else if (filterA.equals("Children")) {
+                if (!rawShelterList.get(i).getGender().contains("hildren") && !rawShelterList.get(i).getGender().contains("nyone")) {
+                    addShelter = false;
+                }
+            } else if (filterA.equals("Young Adults")) {
+                if (!rawShelterList.get(i).getGender().contains("Young adults") && !rawShelterList.get(i).getGender().contains("nyone")) {
+                    addShelter = false;
+                }
+            }
+
+            if (!filterN.isEmpty()) {
+                if (!rawShelterList.get(i).getShelterName().contains(filterN)) {
+                    addShelter = false;
+                }
+            }
+
+            if (addShelter) {
+                filteredList.add(rawShelterList.get(i));
+            }
+        }
+
+
+
+        final List<ShelterInfo> shelterlist = filteredList;
 
         //adding shelter names to the array list
         List<String> namelist = new ArrayList<>();

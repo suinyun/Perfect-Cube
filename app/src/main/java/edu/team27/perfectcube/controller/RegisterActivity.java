@@ -63,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
                     passwords.add(password.getText().toString());
                     LoginData.setUsers(users);
                     LoginData.setPasswords(passwords);
-                    Intent intent = new Intent(a, ListActivity.class);
+                    Intent intent = new Intent(a, LoginActivity.class);
                     startActivity(intent);
                 }
             }

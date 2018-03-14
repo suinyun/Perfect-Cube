@@ -70,6 +70,15 @@ public class LoginActivity extends AppCompatActivity {
                             //login is successful
                             LoginData current = new LoginData(tryUser);
                             Intent intent = new Intent(a, ListActivity.class);
+                            Bundle extras = new Bundle();
+                            extras.putString("gender", "None");
+                            extras.putString("age", "None");
+                            extras.putString("name", "");
+
+                            // add bundle to intent
+                            intent.putExtras(extras);
+
+                            // start the activity
                             startActivity(intent);
                         } else {
                             //incorrect password

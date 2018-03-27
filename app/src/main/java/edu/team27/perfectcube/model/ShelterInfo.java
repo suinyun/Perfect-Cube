@@ -1,15 +1,27 @@
 package edu.team27.perfectcube.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 /**
  * Created by Brooklyn on 2/28/2018.
  */
 
+@Entity
 public class ShelterInfo {
 
+    @PrimaryKey
+    @NonNull
     private String shelterName;
+    @ColumnInfo
     private String capacity;
+    @ColumnInfo
     private String gender;
+    @ColumnInfo
     private String address;
+    @ColumnInfo
     private String phoneNumber;
 
     public ShelterInfo(String shelterName, String capacity, String gender, String

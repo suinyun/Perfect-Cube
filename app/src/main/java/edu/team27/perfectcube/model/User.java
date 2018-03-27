@@ -1,12 +1,24 @@
 package edu.team27.perfectcube.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+import android.support.annotation.NonNull;
+
 /**
  * Created by suinyun on 2/22/18.
  */
 
+@Entity
 public class User {
+    @PrimaryKey
+    @NonNull
     private String username;
+    @ColumnInfo
     private String password;
+    @ColumnInfo
+    @TypeConverters(UserTypeConverter.class)
     private UserType userType;
 
     public User(String username, String password, UserType userType) {

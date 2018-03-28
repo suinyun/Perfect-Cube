@@ -8,15 +8,21 @@ import android.view.View;
 import android.widget.Button;
 
 import edu.team27.perfectcube.R;
+import edu.team27.perfectcube.model.LoginData;
 
 public class WelcomeActivity extends AppCompatActivity {
 
     private Activity a = this;
+    //public LoginData ld = new LoginData(WelcomeActivity.this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        LoginData.setContext(WelcomeActivity.this); //I couldn't figure out a different way to pass the context to LoginData successfully.
+        //I'm not convinced that passing a context is necessary, but it's what Brooklyn showed me, so I tried to follow it.
 
         Button loginButton = (Button) findViewById(R.id.loginButton);
         Button registerButton = (Button) findViewById(R.id.registerButton);

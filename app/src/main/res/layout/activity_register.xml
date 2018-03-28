@@ -93,4 +93,25 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="242dp" />
 
+    <TextView
+        android:id="@+id/warning1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        android:layout_marginStart="11dp"
+        android:text="Please fill out all fields"
+        android:textColor="#ff0000"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/warning2" />
+
+    <TextView
+        android:id="@+id/warning2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username/Password Incorrect"
+        android:textColor="#ff0000"
+        app:layout_constraintBaseline_toBaselineOf="@+id/warning1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
@@ -18,6 +19,7 @@ import edu.team27.perfectcube.R;
 import edu.team27.perfectcube.model.LoginData;
 import edu.team27.perfectcube.model.User;
 import edu.team27.perfectcube.model.UserType;
+import edu.team27.perfectcube.model.UserTypeConverter;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -26,7 +28,11 @@ public class RegisterActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     TextView warning;
-    Spinner userTypeSpinner;
+    TextView warning1;
+    TextView warning2;
+    Spinner spinner;
+
+    public String spinnerType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,34 +43,52 @@ public class RegisterActivity extends AppCompatActivity {
         username = findViewById(R.id.usernameText);
         password = findViewById(R.id.passwordText);
         warning = findViewById(R.id.warning);
-        userTypeSpinner = findViewById(R.id.spinner);
-        /*
-          Set up the adapter to display the allowable majors in the spinner
-         */
+        warning1 = findViewById(R.id.warning1);
+        warning2 = findViewById(R.id.warning2);
+        spinner = findViewById(R.id.spinner);
+
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, UserType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        userTypeSpinner.setAdapter(adapter);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view,
+                                       int position, long id) {
+                spinnerType = adapterView.getItemAtPosition(position).toString();
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                spinnerType = "USER";
+
+            }
+        });
 
         warning.setVisibility(View.GONE);
+        warning1.setVisibility(View.GONE);
+        warning2.setVisibility(View.GONE);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                ArrayList<String> users = LoginData.getUsers();
-                ArrayList<String> passwords = LoginData.getPasswords();
-
-
-
-                if(users.contains(username.getText().toString())) {
-                    warning.setVisibility(View.VISIBLE);
+                if (username.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
+                    //one or both fields are empty
+                    warning2.setVisibility(View.GONE);
+                    warning1.setVisibility(View.VISIBLE);
                 } else {
-                    users.add(username.getText().toString());
-                    passwords.add(password.getText().toString());
-                    LoginData.setUsers(users);
-                    LoginData.setPasswords(passwords);
-                    Intent intent = new Intent(a, LoginActivity.class);
-                    startActivity(intent);
+                    if (LoginData.findUser(username.getText().toString())) {
+                        //username is taken
+                        warning.setVisibility(View.VISIBLE);
+                    } else {
+
+                        LoginData.addUser(username.getText().toString(),password.getText().toString(),UserTypeConverter.stringToEnum(spinnerType));
+                        Intent intent = new Intent(a, LoginActivity.class);
+                        startActivity(intent);
+                    }
                 }
             }
         });

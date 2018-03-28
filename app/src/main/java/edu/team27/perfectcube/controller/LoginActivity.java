@@ -24,13 +24,14 @@ public class LoginActivity extends AppCompatActivity {
     TextView warning1;
     TextView warning2;
 
+    private int badAttempts = 0;
+    boolean fraud = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        LoginData.addUser("user");
-        LoginData.addPass("pass");
 
         loginButton = findViewById(R.id.loginButton);
         cancelButton = findViewById(R.id.cancelButton);
@@ -49,44 +50,46 @@ public class LoginActivity extends AppCompatActivity {
                 String tryUser = username.getText().toString();
                 String tryPass = password.getText().toString();
 
-                ArrayList<String> users = new ArrayList<>();
-                users.add(tryUser);
-                ArrayList<String> passwords = new ArrayList<>();
-                passwords.add(tryPass);
+                //ArrayList<String> users = new ArrayList<>();
+                //ArrayList<String> passwords = new ArrayList<>();
 
+                if (!fraud) {
+                    if (tryUser.isEmpty() || tryPass.isEmpty()) {
+                        //one or both fields are empty
+                        warning2.setVisibility(View.GONE);
+                        warning1.setVisibility(View.VISIBLE);
+                    } else {
+                        //text exists in both fields
+                        warning1.setVisibility(View.GONE);
+                        if (LoginData.findUser(tryUser)) {
+                            if (LoginData.getPass(tryUser).equals(tryPass)) {
+                                //login is successful
+                                Intent intent = new Intent(a, ListActivity.class);
+                                Bundle extras = new Bundle();
+                                extras.putString("gender", "None");
+                                extras.putString("age", "None");
+                                extras.putString("name", "");
 
-                //ArrayList<String> users = LoginData.getUsers();
-                //ArrayList<String> passwords = LoginData.getPasswords();
-                if (tryUser.isEmpty() || tryPass.isEmpty()) {
-                    //one or both fields are empty
-                    warning2.setVisibility(View.GONE);
-                    warning1.setVisibility(View.VISIBLE);
-                } else {
-                    //text exists in both fields
-                    warning1.setVisibility(View.GONE);
-                    if (users.contains(tryUser)) {
-                        int idx = users.indexOf(tryUser);
-                        if (passwords.get(idx).equals(tryPass)) {
-                            //login is successful
-                            LoginData current = new LoginData(tryUser);
-                            Intent intent = new Intent(a, ListActivity.class);
-                            Bundle extras = new Bundle();
-                            extras.putString("gender", "None");
-                            extras.putString("age", "None");
-                            extras.putString("name", "");
+                                // add bundle to intent
+                                intent.putExtras(extras);
 
-                            // add bundle to intent
-                            intent.putExtras(extras);
-
-                            // start the activity
-                            startActivity(intent);
+                                // start the activity
+                                startActivity(intent);
+                            } else {
+                                //incorrect password
+                                badAttempts++;
+                                if (badAttempts == 4) {
+                                    //too many unsuccessful login attempts; display some new error message
+                                    warning2.setVisibility(View.GONE);
+                                    fraud = true;
+                                } else {
+                                    warning2.setVisibility(View.VISIBLE);
+                                }
+                            }
                         } else {
-                            //incorrect password
+                            //incorrect username
                             warning2.setVisibility(View.VISIBLE);
                         }
-                    } else {
-                        //incorrect username
-                        warning2.setVisibility(View.VISIBLE);
                     }
                 }
             }

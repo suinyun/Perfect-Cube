@@ -9,8 +9,8 @@ import android.content.Context;
  */
 
 public class LoginData {
-    private final LoginData ourInstance = new LoginData();
-    private static UserDatabase db; //Brooklyn wrote this variable as "ub," but I ended up using "db" everywhere.
+    private static final LoginData ourInstance = new LoginData();
+    private UserDatabase db; //Brooklyn wrote this variable as "ub," but I ended up using "db" everywhere.
     //private String myUsername;
     private static ArrayList<User> userInfo;
     //private Context context; WARNING!!!! Never store Contexts. They were not meant to be stored. Leave this line commented.
@@ -19,21 +19,21 @@ public class LoginData {
 
     }
 
-    public static void setContext(Context newContext) {
+    //public static void setContext(Context newContext) {
         //context = newContext;
-        db = UserDatabase.getDatabase(newContext);
-        if (db == null) { //db is null when I start it up because the database is null and I have no idea how to write to either without unintended consequences.
-            User first = new User("user","pass",UserType.USER);
-            UserDatabase.userDao().insertUsers(first);
+        //db = UserDatabase.getDatabase(newContext);
+        //if (db == null) { //db is null when I start it up because the database is null and I have no idea how to write to either without unintended consequences.
+            //User first = new User("user","pass",UserType.USER);
+            //UserDatabase.userDao().insertUsers(first);
             /*the userDao method won't work when setContext is static, but WelcomeActivity can't call setContext
               when setContext isn't static. Unfortunately, I have no idea why WelcomeActivity feels it needs
               static context. Figuring out why WelcomeActivity wants this to be static would fix everything,
               but I couldn't figure it out.
              */
-        } else {
-            userInfo = new ArrayList<>(Arrays.asList(db.userDao().loadAllUsers())); //I haven't gotten to the point where this line will run, so hopefully it will work.
-        }
-    }
+        //} else {
+            //userInfo = new ArrayList<>(Arrays.asList(db.userDao().loadAllUsers())); //I haven't gotten to the point where this line will run, so hopefully it will work.
+        //}
+    //}
 
     public static boolean findUser(String name) {
         int length = userInfo.size();

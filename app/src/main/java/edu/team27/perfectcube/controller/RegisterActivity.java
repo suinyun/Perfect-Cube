@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import edu.team27.perfectcube.R;
 import edu.team27.perfectcube.model.LoginData;
 import edu.team27.perfectcube.model.User;
+import edu.team27.perfectcube.model.UserDatabase;
 import edu.team27.perfectcube.model.UserType;
 import edu.team27.perfectcube.model.UserTypeConverter;
 
@@ -33,11 +34,13 @@ public class RegisterActivity extends AppCompatActivity {
     Spinner spinner;
 
     public String spinnerType;
+    private UserDatabase db; //I added the userbase intialized in the WelcomeActivity to RegisterActivity.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        db = UserDatabase.getDatabase(this.getApplicationContext());
 
         submitButton = findViewById(R.id.submitButton);
         username = findViewById(R.id.usernameText);
@@ -84,8 +87,10 @@ public class RegisterActivity extends AppCompatActivity {
                         //username is taken
                         warning.setVisibility(View.VISIBLE);
                     } else {
-
-                        LoginData.addUser(username.getText().toString(),password.getText().toString(),UserTypeConverter.stringToEnum(spinnerType));
+                        //I changed the last parameter in the addUser call. We can expect all registering members to be USERS, right?
+                        LoginData.addUser(username.getText().toString(),password.getText().toString(),UserType.USER);
+                        db.userDao().insertUsers(new User(username.getText().toString(), password.getText().toString(),
+                                UserType.USER)); //This line was added to add the user to the database
                         Intent intent = new Intent(a, LoginActivity.class);
                         startActivity(intent);
                     }

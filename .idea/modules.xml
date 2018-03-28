@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Perfect-Cube.iml" filepath="$PROJECT_DIR$/Perfect-Cube.iml" />
+      <module fileurl="file://C:\Users\emmad\cs2340\m8\Perfect-Cube\Perfect-Cube.iml" filepath="C:\Users\emmad\cs2340\m8\Perfect-Cube\Perfect-Cube.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\emmad\cs2340\m8\Perfect-Cube\app\app.iml" filepath="C:\Users\emmad\cs2340\m8\Perfect-Cube\app\app.iml" />
     </modules>
   </component>
 </project>

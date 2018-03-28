@@ -20,11 +20,18 @@ public class User {
     @ColumnInfo
     @TypeConverters(UserTypeConverter.class)
     private UserType userType;
+    @ColumnInfo
+    private int reservationNumber;
+    @ColumnInfo
+    private String reservationLocation;
 
-    public User(String username, String password, UserType userType) {
+    public User(String username, String password, UserType userType,
+                int reservationNumber, String reservationLocation) {
         this.username = username;
         this.password = password;
         this.userType = userType;
+        this.reservationNumber = reservationNumber;
+        this.reservationLocation = reservationLocation;
     }
 
     public UserType getUserType() {
@@ -49,6 +56,18 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getReservationNumber() {return reservationNumber;}
+
+    public void setReservationNumber(int reservationNumber) {
+        this.reservationNumber = reservationNumber;
+    }
+
+    public String getReservationLocation() { return reservationLocation;}
+
+    public void setReservationLocation(String reservationLocation) {
+        this.reservationLocation = reservationLocation;
     }
 
     @Override

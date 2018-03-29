@@ -33,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        LoginData.updateUserInfo();
+
         loginButton = findViewById(R.id.loginButton);
         cancelButton = findViewById(R.id.cancelButton);
         username = findViewById(R.id.usernameText);

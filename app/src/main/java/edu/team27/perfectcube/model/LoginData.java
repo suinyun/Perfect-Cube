@@ -4,6 +4,8 @@ import java.util.*;
 
 import android.content.Context;
 
+import edu.team27.perfectcube.controller.WelcomeActivity;
+
 /**
  * Created by Brooklyn on 2/13/2018.
  */
@@ -14,6 +16,7 @@ public class LoginData {
     //private String myUsername;
     private static ArrayList<User> userInfo = new ArrayList<>();
     private static User first = new User("user","pass",UserType.USER,0,"");
+
 
     //private Context context; WARNING!!!! Never store Contexts. They were not meant to be stored. Leave this line commented.
 
@@ -36,6 +39,15 @@ public class LoginData {
             //userInfo = new ArrayList<>(Arrays.asList(db.userDao().loadAllUsers())); //I haven't gotten to the point where this line will run, so hopefully it will work.
         //}
     //}
+
+    public static void updateUserInfo() {
+        UserDatabase db = WelcomeActivity.getDb();
+        userInfo.addAll(Arrays.asList(db.userDao().loadAllUsers()));
+        if (!userInfo.contains(first)) {
+            userInfo.add(first);
+            db.userDao().insertUsers(first);
+        }
+    }
 
     public static boolean findUser(String name) {
         userInfo.add(first);

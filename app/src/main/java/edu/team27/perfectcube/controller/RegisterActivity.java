@@ -34,6 +34,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        LoginData.updateUserInfo();
+
         submitButton = findViewById(R.id.submitButton);
         username = findViewById(R.id.usernameText);
         password = findViewById(R.id.passwordText);

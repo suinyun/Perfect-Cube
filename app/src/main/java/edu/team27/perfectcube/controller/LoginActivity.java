@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                                 extras.putString("gender", "None");
                                 extras.putString("age", "None");
                                 extras.putString("name", "");
+                                extras.putString("username", tryUser);
 
                                 // add bundle to intent
                                 intent.putExtras(extras);

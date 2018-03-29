@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.team27.perfectcube.R;
+import edu.team27.perfectcube.model.LoginData;
 import edu.team27.perfectcube.model.ShelterInfo;
 import edu.team27.perfectcube.model.User;
 
@@ -23,6 +24,7 @@ public class SingleListItem extends Activity {
 
     Button reservationbutton;
     Button cancelbutton;
+    Button backbutton;
     EditText bedCount;
     User user; //User is null
 
@@ -40,6 +42,7 @@ public class SingleListItem extends Activity {
         TextView txtpn = (TextView) findViewById(R.id.phone_number);
         reservationbutton = findViewById(R.id.reservationbutton);
         cancelbutton = findViewById(R.id.cancelbutton);
+        backbutton = findViewById(R.id.backbutton);
         bedCount = findViewById(R.id.bedCount);
 
         Intent i = getIntent();
@@ -50,6 +53,14 @@ public class SingleListItem extends Activity {
         String gender = i.getStringExtra("Demographic Restrictions");
         String address = i.getStringExtra("Address");
         String phone = i.getStringExtra("Phone Number");
+        String username = i.getStringExtra("username");
+
+        Bundle bundle = i.getExtras();
+        final String filterGender = bundle.getString("gender");
+        final String filterAge = bundle.getString("age");
+        final String filterName = bundle.getString("name");
+
+        user = LoginData.getUser(username);
 
         // displaying selected product name
         txtsn.setText(name);
@@ -104,12 +115,30 @@ public class SingleListItem extends Activity {
         cancelbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (user.getReservationLocation() == shelter.getShelterName()) {
+                if (user.getReservationLocation().equals(shelter.getShelterName())) {
                     shelter.setCapacity(capacity + user.getReservationNumber());
                     txtc.setText("Vacancies: " + String.valueOf(shelter.getCapacity()));
                     user.setReservationNumber(0);
                     user.setReservationLocation("");
                 }
+            }
+        });
+
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+
+                //add bundle
+                Bundle extras = new Bundle();
+                extras.putString("gender", filterGender );
+                extras.putString("age", filterAge);
+                extras.putString("name", filterName);
+
+                // add bundle to intent
+                intent.putExtras(extras);
+
+                startActivity(intent);
             }
         });
 

@@ -57,26 +57,32 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-                if(users.contains(username.getText().toString())) {
-                    warning.setVisibility(View.VISIBLE);
+                if (LoginData.findUser(username.getText().toString())) {
+                        //username is taken
+                        warning.setVisibility(View.VISIBLE);
                 } else {
+                        //I changed the last parameter in the addUser call. We can expect all registering members to be USERS, right?
+                        LoginData.addUser(username.getText().toString(),password.getText().toString(),UserType.USER,0,"");
+                        //LoginData.db.userDao().insertUsers(new User(username.getText().toString(), password.getText().toString(),
+                                //UserType.USER,1,"")); //This line was added to add the user to the database
+                        Intent intent = new Intent(a, LoginActivity.class);
+                        startActivity(intent);
+                }
+
                     User newUser = new User(username.getText().toString(),
                             password.getText().toString(),
-                            UserType.USER);
+                            UserType.USER, 0, "");
                     users.add(newUser);
                     //passwords.add(password.getText().toString());
                     LoginData.setUserInfo(users);
-                    //LoginData.setPasswords(passwords);
-                    //reservationNumber = 0;
-                    //reservationLocation = "";
                     UserDatabase db = WelcomeActivity.getDb();
                     db.userDao().insertUsers(newUser);
                     WelcomeActivity.setDb(db);
 
                     Intent intent = new Intent(a, LoginActivity.class);
                     startActivity(intent);
+
                 }
-            }
         });
     }
 }

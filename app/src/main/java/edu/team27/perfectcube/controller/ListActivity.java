@@ -32,9 +32,10 @@ public class ListActivity extends Activity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        String filterG = bundle.getString("gender");
-        String filterA = bundle.getString("age");
-        String filterN = bundle.getString("name");
+        final String filterG = bundle.getString("gender");
+        final String filterA = bundle.getString("age");
+        final String filterN = bundle.getString("name");
+        final String username = bundle.getString("username");
 
         //Reading the CSV
         InputStream inputStream = getResources().openRawResource(R.raw.data);
@@ -117,6 +118,15 @@ public class ListActivity extends Activity {
                 i.putExtra("Demographic Restrictions", "Accepting: " + selected.getGender());
                 i.putExtra("Address", selected.getAddress());
                 i.putExtra("Phone Number", selected.getPhoneNumber() + "\n\n");
+                i.putExtra("username", username);
+
+                Bundle extras = new Bundle();
+                extras.putString("gender", filterG);
+                extras.putString("age", filterA);
+                extras.putString("name", filterN);
+
+                // add bundle to intent
+                i.putExtras(extras);
 
                 startActivity(i);
             }

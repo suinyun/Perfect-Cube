@@ -25,6 +25,10 @@ public class User {
     @ColumnInfo
     private String reservationLocation;
 
+    public User () {
+
+    }
+
     public User(String username, String password, UserType userType,
                 int reservationNumber, String reservationLocation) {
         this.username = username;
@@ -32,10 +36,6 @@ public class User {
         this.userType = userType;
         this.reservationNumber = reservationNumber;
         this.reservationLocation = reservationLocation;
-    }
-
-    public User(String username, String password, UserType userType) {
-        this(username, password, userType, 0, "");
     }
 
     public UserType getUserType() {

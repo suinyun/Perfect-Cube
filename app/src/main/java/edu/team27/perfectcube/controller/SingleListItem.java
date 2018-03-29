@@ -55,6 +55,11 @@ public class SingleListItem extends Activity {
         String phone = i.getStringExtra("Phone Number");
         String username = i.getStringExtra("username");
 
+        Bundle bundle = i.getExtras();
+        final String filterGender = bundle.getString("gender");
+        final String filterAge = bundle.getString("age");
+        final String filterName = bundle.getString("name");
+
         user = LoginData.getUser(username);
 
         // displaying selected product name
@@ -125,6 +130,13 @@ public class SingleListItem extends Activity {
                 Intent intent = new Intent(getApplicationContext(), ListActivity.class);
 
                 //add bundle
+                Bundle extras = new Bundle();
+                extras.putString("gender", filterGender );
+                extras.putString("age", filterAge);
+                extras.putString("name", filterName);
+
+                // add bundle to intent
+                intent.putExtras(extras);
 
                 startActivity(intent);
             }

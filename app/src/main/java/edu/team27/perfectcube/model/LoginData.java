@@ -10,7 +10,7 @@ import android.content.Context;
 
 public class LoginData {
     private static final LoginData ourInstance = new LoginData();
-    public static UserDatabase db; //Brooklyn wrote this variable as "ub," but I ended up using "db" everywhere.
+    //public static UserDatabase db; //Brooklyn wrote this variable as "ub," but I ended up using "db" everywhere.
     //private String myUsername;
     private static ArrayList<User> userInfo = new ArrayList<>();
     private static User first = new User("user","pass",UserType.USER,0,"");
@@ -78,6 +78,14 @@ public class LoginData {
           null object, and I can't write to the UserDatabase itself because of a catch-22 wherein the method to do
           it must be simultaneously static and non-static.
         */
+    }
+
+    public static ArrayList<User> getUserInfo() {
+        return userInfo;
+    }
+
+    public static void setUserInfo(ArrayList<User> users) {
+        userInfo = users;
     }
 
     /*

@@ -16,13 +16,5 @@ public abstract class UserDatabase extends RoomDatabase{
 
     public static UserDatabase INSTANCE;
 
-    /*public static UserDatabase getDatabase(Context context) {
-        if (INSTANCE == null) {
-            Room.databaseBuilder(context.getApplicationContext(),
-                    UserDatabase.class, "user_db").build();
-        }
-        return INSTANCE;
-    }*/
-
     public abstract UserDao userDao();
 }

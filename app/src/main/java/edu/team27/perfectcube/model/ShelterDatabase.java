@@ -14,14 +14,6 @@ public abstract class ShelterDatabase extends RoomDatabase {
 
     public static ShelterDatabase INSTANCE;
 
-    public static ShelterDatabase getDatabase(Context context) {
-        if (INSTANCE == null) {
-            Room.databaseBuilder(context.getApplicationContext(),
-                    ShelterDatabase.class, "shelter_db").build();
-        }
-        return INSTANCE;
-    }
-
 
     public abstract ShelterDao shelterDao();
 }

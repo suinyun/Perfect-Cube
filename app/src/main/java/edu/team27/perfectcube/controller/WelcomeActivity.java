@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import edu.team27.perfectcube.R;
 import edu.team27.perfectcube.model.LoginData;
+import edu.team27.perfectcube.model.ShelterDatabase;
 import edu.team27.perfectcube.model.UserDatabase;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -17,7 +18,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private Activity a = this;
     //public LoginData ld = new LoginData(WelcomeActivity.this);
     private static UserDatabase db;
-
+    private static ShelterDatabase sdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,9 @@ public class WelcomeActivity extends AppCompatActivity {
         db = Room.databaseBuilder(getApplicationContext(),
                 UserDatabase.class, "user-database").allowMainThreadQueries()
                 .build();
+        sdb = Room.databaseBuilder(getApplicationContext(),
+                ShelterDatabase.class, "shelter-database")
+                .allowMainThreadQueries().build();
         //From what I read, it was a bad idea to use the getInstance method,
         //and that it's a better idea to create one instance and use it everywhere,
         //so I created the database in the Welcome Activity (at startup)
@@ -60,4 +64,8 @@ public class WelcomeActivity extends AppCompatActivity {
     public static void setDb(UserDatabase database) {
         db = database;
     }
+
+    public static ShelterDatabase getSdb()  { return  sdb; }
+
+    public static void setSdb(ShelterDatabase database) { sdb = database; }
 }

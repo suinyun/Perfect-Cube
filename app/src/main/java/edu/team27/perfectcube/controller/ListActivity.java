@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.team27.perfectcube.R;
+import edu.team27.perfectcube.model.ShelterDatabase;
 import edu.team27.perfectcube.model.ShelterInfo;
 
 public class ListActivity extends Activity {
@@ -42,9 +43,11 @@ public class ListActivity extends Activity {
         CsvFileReader csvFile = new CsvFileReader(inputStream);
         List<ShelterInfo> rawShelterList = csvFile.read();
         List<ShelterInfo> filteredList = new ArrayList<>();
+        ShelterDatabase sdb = WelcomeActivity.getSdb();
 
         for (int i = 0; i < rawShelterList.size(); i++) {
 
+            sdb.shelterDao().insertShelters(rawShelterList.get(i));
             boolean addShelter = true;
 
             if (filterG.equals("Male")) {
@@ -82,7 +85,7 @@ public class ListActivity extends Activity {
             }
         }
 
-
+        WelcomeActivity.setSdb(sdb);
 
         final List<ShelterInfo> shelterlist = filteredList;
 

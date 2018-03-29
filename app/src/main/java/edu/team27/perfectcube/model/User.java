@@ -34,6 +34,10 @@ public class User {
         this.reservationLocation = reservationLocation;
     }
 
+    public User(String username, String password, UserType userType) {
+        this(username, password, userType, 0, "");
+    }
+
     public UserType getUserType() {
         return userType;
     }

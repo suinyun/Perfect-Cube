@@ -66,6 +66,14 @@ public class LoginData {
         */
     }
 
+    public static ArrayList<User> getUserInfo() {
+        return userInfo;
+    }
+
+    public static void setUserInfo(ArrayList<User> users) {
+        userInfo = users;
+    }
+
     /*
     static LoginData getInstance() {
         return ourInstance;

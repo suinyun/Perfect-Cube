@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import edu.team27.perfectcube.R;
 import edu.team27.perfectcube.model.LoginData;
 import edu.team27.perfectcube.model.User;
+import edu.team27.perfectcube.model.UserDatabase;
 import edu.team27.perfectcube.model.UserType;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -53,20 +54,26 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                ArrayList<String> users = LoginData.getUsers();
-                ArrayList<String> passwords = LoginData.getPasswords();
+                ArrayList<User> users = LoginData.getUserInfo();
+                //ArrayList<String> passwords = LoginData.getPasswords();
 
 
 
                 if(users.contains(username.getText().toString())) {
                     warning.setVisibility(View.VISIBLE);
                 } else {
-                    users.add(username.getText().toString());
-                    passwords.add(password.getText().toString());
-                    LoginData.setUsers(users);
-                    LoginData.setPasswords(passwords);
-                    reservationNumber = 0;
-                    reservationLocation = "";
+                    User newUser = new User(username.getText().toString(),
+                            password.getText().toString(),
+                            UserType.USER);
+                    users.add(newUser);
+                    //passwords.add(password.getText().toString());
+                    LoginData.setUserInfo(users);
+                    //LoginData.setPasswords(passwords);
+                    //reservationNumber = 0;
+                    //reservationLocation = "";
+                    UserDatabase db = WelcomeActivity.getDb();
+                    db.userDao().insertUsers(newUser);
+                    WelcomeActivity.setDb(db);
                     Intent intent = new Intent(a, LoginActivity.class);
                     startActivity(intent);
                 }

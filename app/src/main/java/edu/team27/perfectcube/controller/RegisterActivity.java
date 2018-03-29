@@ -72,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
                     UserDatabase db = WelcomeActivity.getDb();
                     db.userDao().insertUsers(newUser);
                     WelcomeActivity.setDb(db);
-                    
+
                     Intent intent = new Intent(a, LoginActivity.class);
                     startActivity(intent);
                 }

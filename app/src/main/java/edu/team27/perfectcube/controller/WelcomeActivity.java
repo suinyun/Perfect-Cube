@@ -24,7 +24,8 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         db = Room.databaseBuilder(getApplicationContext(),
-                UserDatabase.class, "user-database").build();
+                UserDatabase.class, "user-database").allowMainThreadQueries()
+                .build();
         //From what I read, it was a bad idea to use the getInstance method,
         //and that it's a better idea to create one instance and use it everywhere,
         //so I created the database in the Welcome Activity (at startup)

@@ -88,9 +88,9 @@ public class RegisterActivity extends AppCompatActivity {
                         warning.setVisibility(View.VISIBLE);
                     } else {
                         //I changed the last parameter in the addUser call. We can expect all registering members to be USERS, right?
-                        LoginData.addUser(username.getText().toString(),password.getText().toString(),UserType.USER);
+                        LoginData.addUser(username.getText().toString(),password.getText().toString(),UserType.USER,0,"");
                         db.userDao().insertUsers(new User(username.getText().toString(), password.getText().toString(),
-                                UserType.USER)); //This line was added to add the user to the database
+                                UserType.USER,1,"")); //This line was added to add the user to the database
                         Intent intent = new Intent(a, LoginActivity.class);
                         startActivity(intent);
                     }

@@ -22,6 +22,7 @@ public class ListActivity extends Activity {
     private ListAdapter adapter;
     Button logoutButton;
     Button searchButton;
+    static ShelterInfo selected;
 
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -105,7 +106,7 @@ public class ListActivity extends Activity {
                                     int position, long id) {
 
                 // selected item
-                ShelterInfo selected = shelterlist.get(position);
+                selected = shelterlist.get(position);
 
                 // Launching new Activity on selecting single List Item
                 Intent i = new Intent(getApplicationContext(), SingleListItem.class);

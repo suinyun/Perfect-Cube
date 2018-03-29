@@ -12,7 +12,9 @@ public class LoginData {
     private static final LoginData ourInstance = new LoginData();
     private UserDatabase db; //Brooklyn wrote this variable as "ub," but I ended up using "db" everywhere.
     //private String myUsername;
-    private static ArrayList<User> userInfo;
+    private static ArrayList<User> userInfo = new ArrayList<>();
+    private static User first = new User("user","pass",UserType.USER,0,"");
+
     //private Context context; WARNING!!!! Never store Contexts. They were not meant to be stored. Leave this line commented.
 
     public LoginData() {
@@ -36,6 +38,7 @@ public class LoginData {
     //}
 
     public static boolean findUser(String name) {
+        userInfo.add(first);
         int length = userInfo.size();
         for (int i = 0; i < length; i++) {
             if (userInfo.get(i).getUsername().equals(name)) {
@@ -56,8 +59,8 @@ public class LoginData {
         return pass;
     }
 
-    public static void addUser(String name, String pass, UserType type) {
-        User newser = new User(name,pass,type);
+    public static void addUser(String name, String pass, UserType type, int number, String place) {
+        User newser = new User(name,pass,type,number,place);
         userInfo.add(newser);
         /*I've been storing registered users in this userInfo ArrayList, which isn't linked to the database, but is
           easier to work with. I can't write to db, because doing so requires using an interface method call on a

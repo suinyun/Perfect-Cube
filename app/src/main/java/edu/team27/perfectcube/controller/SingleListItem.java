@@ -24,7 +24,7 @@ public class SingleListItem extends Activity {
     Button reservationbutton;
     Button cancelbutton;
     EditText bedCount;
-    User user;
+    User user; //User is null
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,8 @@ public class SingleListItem extends Activity {
         TextView txta = (TextView) findViewById(R.id.address);
         TextView txtpn = (TextView) findViewById(R.id.phone_number);
         reservationbutton = findViewById(R.id.reservationbutton);
-        final EditText bedCount = findViewById(R.id.bedCount);
+        cancelbutton = findViewById(R.id.cancelbutton);
+        bedCount = findViewById(R.id.bedCount);
 
         Intent i = getIntent();
 
@@ -56,6 +57,7 @@ public class SingleListItem extends Activity {
         txtg.setText(gender);
         txta.setText(address);
         txtpn.setText(phone);
+
 
         reservationbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,12 +94,12 @@ public class SingleListItem extends Activity {
                     //update display
                     txtc.setText("Vacancies: " + String.valueOf(
                             shelter.getCapacity()));
-
                 }
 
 
             }
         });
+
 
         cancelbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,5 +112,6 @@ public class SingleListItem extends Activity {
                 }
             }
         });
+
     }
 }

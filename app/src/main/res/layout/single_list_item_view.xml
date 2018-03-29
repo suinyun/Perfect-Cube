@@ -52,5 +52,4 @@
         android:layout_below="@+id/reservationbutton"
         android:text="Cancel Your Reservation"/>
 
-
 </LinearLayout>

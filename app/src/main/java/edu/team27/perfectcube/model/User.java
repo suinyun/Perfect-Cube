@@ -62,7 +62,7 @@ public class User {
         this.password = password;
     }
 
-    public int getReservationNumber() {return reservationNumber;}
+    public int getReservationNumber() { return reservationNumber;}
 
     public void setReservationNumber(int reservationNumber) {
         this.reservationNumber = reservationNumber;

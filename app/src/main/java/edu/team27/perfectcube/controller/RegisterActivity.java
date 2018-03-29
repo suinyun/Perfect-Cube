@@ -28,8 +28,6 @@ public class RegisterActivity extends AppCompatActivity {
     EditText password;
     TextView warning;
     Spinner userTypeSpinner;
-    int reservationNumber;
-    String reservationLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
                     UserDatabase db = WelcomeActivity.getDb();
                     db.userDao().insertUsers(newUser);
                     WelcomeActivity.setDb(db);
+                    
                     Intent intent = new Intent(a, LoginActivity.class);
                     startActivity(intent);
                 }

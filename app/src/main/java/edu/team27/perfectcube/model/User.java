@@ -25,6 +25,10 @@ public class User {
     @ColumnInfo
     private String reservationLocation;
 
+    public User () {
+
+    }
+
     public User(String username, String password, UserType userType,
                 int reservationNumber, String reservationLocation) {
         this.username = username;

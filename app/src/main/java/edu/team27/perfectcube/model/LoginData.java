@@ -59,6 +59,17 @@ public class LoginData {
         return pass;
     }
 
+    public static User getUser(String name) {
+        User ourUser = new User();
+        int length = userInfo.size();
+        for (int i = 0; i < length; i++) {
+            if (userInfo.get(i).getUsername().equals(name)) {
+                ourUser = userInfo.get(i);
+            }
+        }
+        return ourUser;
+    }
+
     public static void addUser(String name, String pass, UserType type, int number, String place) {
         User newser = new User(name,pass,type,number,place);
         userInfo.add(newser);

@@ -10,7 +10,7 @@ import android.content.Context;
 
 public class LoginData {
     private static final LoginData ourInstance = new LoginData();
-    private UserDatabase db; //Brooklyn wrote this variable as "ub," but I ended up using "db" everywhere.
+    public static UserDatabase db; //Brooklyn wrote this variable as "ub," but I ended up using "db" everywhere.
     //private String myUsername;
     private static ArrayList<User> userInfo = new ArrayList<>();
     private static User first = new User("user","pass",UserType.USER,0,"");

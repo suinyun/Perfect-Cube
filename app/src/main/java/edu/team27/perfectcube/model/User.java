@@ -25,7 +25,8 @@ public class User {
     @ColumnInfo
     private String reservationLocation;
 
-    public User(String username, String password, UserType userType, int reservationNumber, String reservationLocation) {
+    public User(String username, String password, UserType userType,
+                int reservationNumber, String reservationLocation) {
         this.username = username;
         this.password = password;
         this.userType = userType;
@@ -59,7 +60,7 @@ public class User {
 
     public int getReservationNumber() { return reservationNumber;}
 
-    public void setReservationNumber( int reservationNumber) {
+    public void setReservationNumber(int reservationNumber) {
         this.reservationNumber = reservationNumber;
     }
 

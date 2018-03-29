@@ -24,7 +24,7 @@ public class SingleListItem extends Activity {
     Button reservationbutton;
     Button cancelbutton;
     EditText bedCount;
-    User user;
+    User user; //User is null
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

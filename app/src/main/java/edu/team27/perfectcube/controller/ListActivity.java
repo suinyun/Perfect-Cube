@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.team27.perfectcube.R;
@@ -38,16 +39,15 @@ public class ListActivity extends Activity {
         final String filterN = bundle.getString("name");
         final String username = bundle.getString("username");
 
-        //Reading the CSV
-        InputStream inputStream = getResources().openRawResource(R.raw.data);
-        CsvFileReader csvFile = new CsvFileReader(inputStream);
-        List<ShelterInfo> rawShelterList = csvFile.read();
         List<ShelterInfo> filteredList = new ArrayList<>();
         ShelterDatabase sdb = WelcomeActivity.getSdb();
+        //List<ShelterInfo> rawShelterList = sdb.shelterDao().loadAllShelters();
+        ArrayList<ShelterInfo> rawShelterList = new ArrayList<>();
+        rawShelterList.addAll(Arrays.asList(sdb.shelterDao().loadAllShelters()));
+
 
         for (int i = 0; i < rawShelterList.size(); i++) {
 
-            sdb.shelterDao().insertShelters(rawShelterList.get(i));
             boolean addShelter = true;
 
             if (filterG.equals("Male")) {
@@ -84,8 +84,6 @@ public class ListActivity extends Activity {
                 filteredList.add(rawShelterList.get(i));
             }
         }
-
-        WelcomeActivity.setSdb(sdb);
 
         final List<ShelterInfo> shelterlist = filteredList;
 

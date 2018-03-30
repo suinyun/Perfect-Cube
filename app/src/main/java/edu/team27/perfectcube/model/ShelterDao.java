@@ -7,6 +7,8 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import java.util.ArrayList;
+
 /**
  * Created by Brooklyn on 3/27/2018.
  */
@@ -23,5 +25,5 @@ public interface ShelterDao {
     public void deleteShelters(ShelterInfo ... shelters);
 
     @Query("SELECT * FROM shelterinfo")
-    public ShelterInfo[] loadShelterInfo();
+    public ShelterInfo[] loadAllShelters();
 }

@@ -13,8 +13,10 @@ import android.widget.Toast;
 
 import edu.team27.perfectcube.R;
 import edu.team27.perfectcube.model.LoginData;
+import edu.team27.perfectcube.model.ShelterDatabase;
 import edu.team27.perfectcube.model.ShelterInfo;
 import edu.team27.perfectcube.model.User;
+import edu.team27.perfectcube.model.UserDatabase;
 
 /**
  * Created by emmad on 3/8/2018.
@@ -26,7 +28,7 @@ public class SingleListItem extends Activity {
     Button cancelbutton;
     Button backbutton;
     EditText bedCount;
-    User user; //User is null
+    User user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,9 @@ public class SingleListItem extends Activity {
         txta.setText(address);
         txtpn.setText(phone);
 
+        final ShelterDatabase sdb = WelcomeActivity.getSdb();
+        final UserDatabase db = WelcomeActivity.getDb();
+
 
         reservationbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +95,10 @@ public class SingleListItem extends Activity {
                     bedCount.setError("greater than capacity");
                     Toast.makeText(getBaseContext(), "greater than capacity", Toast.LENGTH_SHORT).show();
                     return;
+                } else if (!user.getReservationLocation().isEmpty()) {
+                    bedCount.setError("already has a reservation");
+                    Toast.makeText(getBaseContext(), "You must cancel your current reservation", Toast.LENGTH_SHORT).show();
+                    return;
                 } else {
                     //3 things: make sure that user cant reserve the same shelter twice
                     // you want to decrease the amount of beds
@@ -97,16 +106,16 @@ public class SingleListItem extends Activity {
 
                     // updating user info
                     user.setReservationNumber(bedCountNum);
-                    user.setReservationLocation(name);
+                    user.setReservationLocation(shelter.getShelterName());
 
                     //update shelter info
                     shelter.setCapacity(capacity - bedCountNum);
+
 
                     //update display
                     txtc.setText("Vacancies: " + String.valueOf(
                             shelter.getCapacity()));
                 }
-
 
             }
         });
@@ -115,6 +124,11 @@ public class SingleListItem extends Activity {
         cancelbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    boolean a = user.getReservationLocation().equals(shelter.getShelterName());
+                } catch (NullPointerException e) {
+                    txtc.setText("You done messed up now");
+                }
                 if (user.getReservationLocation().equals(shelter.getShelterName())) {
                     shelter.setCapacity(capacity + user.getReservationNumber());
                     txtc.setText("Vacancies: " + String.valueOf(shelter.getCapacity()));
@@ -127,6 +141,11 @@ public class SingleListItem extends Activity {
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //update databases to reflect changes
+                sdb.shelterDao().updateShelters(shelter);
+                db.userDao().updateUsers(user);
+
                 Intent intent = new Intent(getApplicationContext(), ListActivity.class);
 
                 //add bundle

@@ -8,9 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.team27.perfectcube.R;
 import edu.team27.perfectcube.model.LoginData;
 import edu.team27.perfectcube.model.ShelterDatabase;
+import edu.team27.perfectcube.model.ShelterInfo;
 import edu.team27.perfectcube.model.UserDatabase;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -34,8 +39,15 @@ public class WelcomeActivity extends AppCompatActivity {
         //and that it's a better idea to create one instance and use it everywhere,
         //so I created the database in the Welcome Activity (at startup)
 
-        //LoginData.setContext(WelcomeActivity.this); //I couldn't figure out a different way to pass the context to LoginData successfully.
-        //I'm not convinced that passing a context is necessary, but it's what Brooklyn showed me, so I tried to follow it.
+        InputStream inputStream = getResources().openRawResource(R.raw.data);
+        CsvFileReader csvFile = new CsvFileReader(inputStream);
+        List<ShelterInfo> rawShelterList = csvFile.read();
+        ShelterDatabase sdb = WelcomeActivity.getSdb();
+        int length = rawShelterList.size();
+        for (int i = 0; i < length; i++) {
+            sdb.shelterDao().insertShelters(rawShelterList.get(i));
+        }
+        WelcomeActivity.setSdb(sdb);
 
         Button loginButton = (Button) findViewById(R.id.loginButton);
         Button registerButton = (Button) findViewById(R.id.registerButton);

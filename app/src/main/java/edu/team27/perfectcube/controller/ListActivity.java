@@ -115,7 +115,7 @@ public class ListActivity extends Activity {
 
                 // sending data to new activity
                 i.putExtra("Name", "\n" + selected.getShelterName() + "\n");
-                i.putExtra("Capacity", Integer.parseInt(selected.getCapacity()));
+                i.putExtra("Capacity", selected.getCapacity());
                 i.putExtra("Demographic Restrictions", "Accepting: " + selected.getGender());
                 i.putExtra("Address", selected.getAddress());
                 i.putExtra("Phone Number", selected.getPhoneNumber() + "\n\n");

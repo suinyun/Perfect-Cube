@@ -51,7 +51,7 @@ public class SingleListItem extends Activity {
 
         // getting attached intent data
         final String name = i.getStringExtra("Name");
-        final int capacity = i.getIntExtra("Capacity", -1);
+        final String capacity = i.getStringExtra("Capacity");
         String gender = i.getStringExtra("Demographic Restrictions");
         String address = i.getStringExtra("Address");
         String phone = i.getStringExtra("Phone Number");
@@ -66,7 +66,7 @@ public class SingleListItem extends Activity {
 
         // displaying selected product name
         txtsn.setText(name);
-        txtc.setText("Vacancies: " + String.valueOf(capacity));
+        txtc.setText("Vacancies: " + capacity);
         txtg.setText(gender);
         txta.setText(address);
         txtpn.setText(phone);
@@ -91,12 +91,13 @@ public class SingleListItem extends Activity {
                     bedCount.setError("less than 0");
                     Toast.makeText(getBaseContext(), "less than 0", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (bedCountNum > capacity) {
+                } else if (bedCountNum > Integer.parseInt(capacity)) {
                     bedCount.setError("greater than capacity");
                     Toast.makeText(getBaseContext(), "greater than capacity", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (!user.getReservationLocation().isEmpty()) {
-                    bedCount.setError("already has a reservation");
+                } else if (user.getReservationLocation() != "") {
+                    String msg = "you already have a reservation at\n" + user.getReservationLocation();
+                    bedCount.setError(msg);
                     Toast.makeText(getBaseContext(), "You must cancel your current reservation", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
@@ -109,12 +110,41 @@ public class SingleListItem extends Activity {
                     user.setReservationLocation(shelter.getShelterName());
 
                     //update shelter info
-                    shelter.setCapacity(capacity - bedCountNum);
+                    if (shelter.getShelterName().equals("Eden Village")) {
+                        //32 for families, 80 singles
+
+                    } else if (shelter.getShelterName().equals("Our House")
+                            || shelter.getShelterName().equals("Hope Atlanta")) {
+                        //76 family rooms
+                        //22 apartments
+                        String capnum = shelter.getCapacity();
+                        String[] capsplit = capnum.split("\\s");
+                        capnum = capsplit[0];
+                        int cap = Integer.parseInt(capnum);
+                        String newcap = String.valueOf(cap - bedCountNum);
+                        for (int i = 1; i < capsplit.length; i++) {
+                            newcap = newcap + " " + capsplit[i];
+                        }
+                        shelter.setCapacity(newcap);
+                    } else {
+                        int cap = Integer.parseInt(shelter.getCapacity());
+                        String newcap = String.valueOf(cap - bedCountNum);
+                        shelter.setCapacity(newcap);
+                    }
 
 
                     //update display
                     txtc.setText("Vacancies: " + String.valueOf(
                             shelter.getCapacity()));
+
+                    //update databases
+                    UserDatabase db = WelcomeActivity.getDb();
+                    db.userDao().updateUsers(user);
+                    WelcomeActivity.setDb(db);
+
+                    ShelterDatabase sdb = WelcomeActivity.getSdb();
+                    sdb.shelterDao().updateShelters(shelter);
+                    WelcomeActivity.setSdb(sdb);
                 }
 
             }
@@ -126,14 +156,24 @@ public class SingleListItem extends Activity {
             public void onClick(View view) {
                 try {
                     boolean a = user.getReservationLocation().equals(shelter.getShelterName());
+                    if (a == true) {
+                        shelter.setCapacity(capacity + user.getReservationNumber());
+                        txtc.setText("Vacancies: " + String.valueOf(shelter.getCapacity()));
+                        user.setReservationNumber(0);
+                        user.setReservationLocation("");
+
+                        UserDatabase db = WelcomeActivity.getDb();
+                        db.userDao().updateUsers(user);
+                        WelcomeActivity.setDb(db);
+
+                        ShelterDatabase sdb = WelcomeActivity.getSdb();
+                        sdb.shelterDao().updateShelters(shelter);
+                        WelcomeActivity.setSdb(sdb);
+                    } else {
+                        Toast.makeText(getBaseContext(), "you don't have a reservation", Toast.LENGTH_SHORT).show();
+                    }
                 } catch (NullPointerException e) {
                     txtc.setText("You done messed up now");
-                }
-                if (user.getReservationLocation().equals(shelter.getShelterName())) {
-                    shelter.setCapacity(capacity + user.getReservationNumber());
-                    txtc.setText("Vacancies: " + String.valueOf(shelter.getCapacity()));
-                    user.setReservationNumber(0);
-                    user.setReservationLocation("");
                 }
             }
         });

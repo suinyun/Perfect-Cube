@@ -45,7 +45,7 @@ public class ShelterInfo {
         return this.capacity;
     }
 
-    public void setCapacity(int cap) { capacity = Integer.toString(cap);}
+    public void setCapacity(String cap) { capacity = cap; }
 
     public String getGender() {
         return this.gender;

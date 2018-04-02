@@ -26,7 +26,7 @@ public class User {
     private String reservationLocation;
 
     public User () {
-
+        //Please never use this.
     }
 
     public User(String username, String password, UserType userType,

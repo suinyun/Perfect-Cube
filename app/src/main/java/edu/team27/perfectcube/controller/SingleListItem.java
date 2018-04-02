@@ -95,7 +95,7 @@ public class SingleListItem extends Activity {
                     bedCount.setError("greater than capacity");
                     Toast.makeText(getBaseContext(), "greater than capacity", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (user.getReservationLocation() != "") {
+                } else if (!user.getReservationLocation().equals("")) {
                     String msg = "you already have a reservation at\n" + user.getReservationLocation();
                     bedCount.setError(msg);
                     Toast.makeText(getBaseContext(), "You must cancel your current reservation", Toast.LENGTH_SHORT).show();
@@ -134,8 +134,8 @@ public class SingleListItem extends Activity {
 
 
                     //update display
-                    txtc.setText("Vacancies: " + String.valueOf(
-                            shelter.getCapacity()));
+                    String message = "Vacancies: " + String.valueOf(shelter.getCapacity());
+                    txtc.setText(message);
 
                     //update databases
                     UserDatabase db = WelcomeActivity.getDb();
@@ -156,9 +156,10 @@ public class SingleListItem extends Activity {
             public void onClick(View view) {
                 try {
                     boolean a = user.getReservationLocation().equals(shelter.getShelterName());
-                    if (a == true) {
+                    if (a) {
                         shelter.setCapacity(capacity + user.getReservationNumber());
-                        txtc.setText("Vacancies: " + String.valueOf(shelter.getCapacity()));
+                        String message = "Vacancies: " + String.valueOf(shelter.getCapacity());
+                        txtc.setText(message);
                         user.setReservationNumber(0);
                         user.setReservationLocation("");
 

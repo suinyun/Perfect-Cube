@@ -58,4 +58,6 @@ public class ShelterInfo {
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
+
+    public static boolean needsToRead() { return false; } //Change to true, build and run if ShelterDatabase gets out of whack.
 }

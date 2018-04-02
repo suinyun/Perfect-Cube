@@ -12,7 +12,7 @@ import edu.team27.perfectcube.R;
  * Created by suinyun on 4/1/18.
  */
 
-public class MapViewActivity extends Fragment implements OnMapReadyCallback {
+public class MapViewActivity extends Fragment {
 
     GoogleMap mGoogleMap;
     MapView mMapView;

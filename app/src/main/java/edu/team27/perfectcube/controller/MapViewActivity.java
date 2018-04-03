@@ -2,17 +2,29 @@ package edu.team27.perfectcube.controller;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import edu.team27.perfectcube.R;
+import edu.team27.perfectcube.model.ShelterInfo;
 
 /**
  * Created by suinyun on 4/1/18.
  */
 
-public class MapViewActivity extends Fragment {
+public class MapViewActivity extends FragmentActivity implements OnMapReadyCallback {
 
     GoogleMap mGoogleMap;
     MapView mMapView;
@@ -41,7 +53,12 @@ public class MapViewActivity extends Fragment {
         mGoogleMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        //where you add the pins
+        ArrayList<ShelterInfo> shelters = new ArrayList<>(Arrays.asList(WelcomeActivity.getSdb()
+                .shelterDao().loadAllShelters()));
+        for (ShelterInfo shelter : shelters) {
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(shelter.getLatitude(), shelter.getLongitude()))
+                    .title(shelter.getShelterName()));
+        }
     }
 
 }

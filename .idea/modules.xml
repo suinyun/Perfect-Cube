@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Perfect-Cube.iml" filepath="$PROJECT_DIR$/Perfect-Cube.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/merge.iml" filepath="$PROJECT_DIR$/merge.iml" />
+      <module fileurl="file://C:\Users\Brooklyn\Desktop\CS 2340\M9\Perfect-Cube\merge.iml" filepath="C:\Users\Brooklyn\Desktop\CS 2340\M9\Perfect-Cube\merge.iml" />
     </modules>
   </component>
 </project>

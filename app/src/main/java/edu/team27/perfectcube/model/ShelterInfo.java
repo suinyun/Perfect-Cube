@@ -23,12 +23,19 @@ public class ShelterInfo {
     private String address;
     @ColumnInfo
     private String phoneNumber;
+    @ColumnInfo
+    private double longitude;
+    @ColumnInfo
+    private double latitude;
 
-    public ShelterInfo(String shelterName, String capacity, String gender, String
-                       address, String phoneNumber) {
+    public ShelterInfo(String shelterName, String capacity, String gender,
+                       String longitude, String latitude, String address,
+                       String phoneNumber) {
         this.shelterName = shelterName;
         this.capacity = capacity;
         this.gender = gender;
+        this.longitude = Double.parseDouble(longitude); //Keep an eye out for this.
+        this.latitude = Double.parseDouble(latitude); //May cause issues if negative
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
@@ -58,6 +65,10 @@ public class ShelterInfo {
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
+
+    public double getLongitude() { return this.longitude; }
+
+    public double getLatitude() { return this.latitude; }
 
     public static boolean needsToRead() { return false; } //Change to true, build and run if ShelterDatabase gets out of whack.
 }

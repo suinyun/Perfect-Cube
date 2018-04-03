@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name">Perfect Cube</string>
     <string name="welcome">Welcome!</string>
-    <string-array name = "gender_spinner_array">
+    <string-array name="gender_spinner_array">
         <item>None</item>
         <item>Male</item>
         <item>Female</item>
     </string-array>
-    <string-array name = "age_spinner_array">
+    <string-array name="age_spinner_array">
         <item>None</item>
         <item>Families with Newborns</item>
         <item>Children</item>
         <item>Young Adults</item>
     </string-array>
+    <string name="title_activity_map">MapActivity</string>
 </resources>

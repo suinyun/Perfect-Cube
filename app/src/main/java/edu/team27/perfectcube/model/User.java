@@ -2,6 +2,7 @@ package edu.team27.perfectcube.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
@@ -25,6 +26,7 @@ public class User {
     @ColumnInfo
     private String reservationLocation;
 
+    @Ignore
     public User () {
         //Please never use this.
     }

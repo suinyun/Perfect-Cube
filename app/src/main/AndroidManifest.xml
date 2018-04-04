@@ -27,7 +27,6 @@
             android:label="Single Item Selected"></activity>
         <activity android:name=".controller.SearchActivity" />
         <activity android:name=".controller.ReservationActivity" />
-        <activity android:name=".controller.MapViewActivity" />
 
         <!--Maps Android Key-->
         <meta-data

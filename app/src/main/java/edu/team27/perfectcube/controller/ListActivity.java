@@ -24,7 +24,6 @@ public class ListActivity extends Activity {
     private ListAdapter adapter;
     Button logoutButton;
     Button searchButton;
-    Button mapButton;
     static ShelterInfo selected;
 
     public void onCreate(Bundle saveInstanceState) {
@@ -157,16 +156,6 @@ public class ListActivity extends Activity {
             }
         });
 
-        mapButton = findViewById(R.id.mapButton);
-
-        mapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MapViewActivity.class);
-                startActivity(intent);
-
-            }
-        });
 
     }
 }

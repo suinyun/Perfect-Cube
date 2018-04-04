@@ -24,6 +24,7 @@ public class ListActivity extends Activity {
     private ListAdapter adapter;
     Button logoutButton;
     Button searchButton;
+    Button mapButton;
     static ShelterInfo selected;
 
     public void onCreate(Bundle saveInstanceState) {
@@ -150,12 +151,38 @@ public class ListActivity extends Activity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(intent);
+                Intent i = new Intent(getApplicationContext(), SearchActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("gender", filterG);
+                extras.putString("age", filterA);
+                extras.putString("name", filterN);
+                extras.putString("username", username);
+
+                // add bundle to intent
+                i.putExtras(extras);
+                startActivity(i);
 
             }
         });
 
+        mapButton = findViewById(R.id.mapButton);
+
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), MapViewActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("gender", filterG);
+                extras.putString("age", filterA);
+                extras.putString("name", filterN);
+                extras.putString("username", username);
+
+                // add bundle to intent
+                i.putExtras(extras);
+                startActivity(i);
+
+            }
+        });
 
     }
 }

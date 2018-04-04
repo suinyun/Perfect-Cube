@@ -13,7 +13,7 @@
         android:id="@+id/logoutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/searchButton"
+        android:layout_below="@+id/mapButton"
         android:text="Logout" />
 
     <Button
@@ -22,5 +22,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_view"
         android:text="Search" />
+
+    <Button
+        android:id="@+id/mapButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchButton"
+        android:text="View Map" />
 
 </RelativeLayout>

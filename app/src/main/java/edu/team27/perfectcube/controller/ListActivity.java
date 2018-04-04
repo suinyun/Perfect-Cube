@@ -119,12 +119,13 @@ public class ListActivity extends Activity {
                 i.putExtra("Demographic Restrictions", "Accepting: " + selected.getGender());
                 i.putExtra("Address", selected.getAddress());
                 i.putExtra("Phone Number", selected.getPhoneNumber() + "\n\n");
-                i.putExtra("username", username);
+                //i.putExtra("username", username);
 
                 Bundle extras = new Bundle();
                 extras.putString("gender", filterG);
                 extras.putString("age", filterA);
                 extras.putString("name", filterN);
+                extras.putString("username", username);
 
                 // add bundle to intent
                 i.putExtras(extras);

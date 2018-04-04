@@ -55,12 +55,13 @@ public class SingleListItem extends Activity {
         String gender = i.getStringExtra("Demographic Restrictions");
         String address = i.getStringExtra("Address");
         String phone = i.getStringExtra("Phone Number");
-        String username = i.getStringExtra("username");
+        //String username = i.getStringExtra("username");
 
         Bundle bundle = i.getExtras();
         final String filterGender = bundle.getString("gender");
         final String filterAge = bundle.getString("age");
         final String filterName = bundle.getString("name");
+        final String username = bundle.getString("username");
 
         user = LoginData.getUser(username);
 
@@ -91,11 +92,13 @@ public class SingleListItem extends Activity {
                     bedCount.setError("less than 0");
                     Toast.makeText(getBaseContext(), "less than 0", Toast.LENGTH_SHORT).show();
                     return;
+                } else if (bedCountNum == 0) {
+                    Toast.makeText(getBaseContext(), "Please enter a number greater than 0", Toast.LENGTH_SHORT).show();
                 } else if (bedCountNum > Integer.parseInt(capacity)) {
                     bedCount.setError("greater than capacity");
                     Toast.makeText(getBaseContext(), "greater than capacity", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (user.getReservationLocation() != "") {
+                } else if (!user.getReservationLocation().equals("")) {
                     String msg = "you already have a reservation at\n" + user.getReservationLocation();
                     bedCount.setError(msg);
                     Toast.makeText(getBaseContext(), "You must cancel your current reservation", Toast.LENGTH_SHORT).show();
@@ -134,8 +137,8 @@ public class SingleListItem extends Activity {
 
 
                     //update display
-                    txtc.setText("Vacancies: " + String.valueOf(
-                            shelter.getCapacity()));
+                    String message = "Vacancies: " + String.valueOf(shelter.getCapacity());
+                    txtc.setText(message);
 
                     //update databases
                     UserDatabase db = WelcomeActivity.getDb();
@@ -156,22 +159,25 @@ public class SingleListItem extends Activity {
             public void onClick(View view) {
                 try {
                     boolean a = user.getReservationLocation().equals(shelter.getShelterName());
-                    if (a == true) {
-                        shelter.setCapacity(capacity + user.getReservationNumber());
-                        txtc.setText("Vacancies: " + String.valueOf(shelter.getCapacity()));
-                        user.setReservationNumber(0);
-                        user.setReservationLocation("");
-
-                        UserDatabase db = WelcomeActivity.getDb();
-                        db.userDao().updateUsers(user);
-                        WelcomeActivity.setDb(db);
+                    if (a) {
+                        shelter.setCapacity(Integer.toString(Integer.parseInt(shelter.getCapacity()) + user.getReservationNumber()));
+                        String message = "Vacancies: " + String.valueOf(shelter.getCapacity());
+                        txtc.setText(message);
 
                         ShelterDatabase sdb = WelcomeActivity.getSdb();
                         sdb.shelterDao().updateShelters(shelter);
                         WelcomeActivity.setSdb(sdb);
-                    } else {
+                    } else if (user.getReservationLocation().equals("")) {
                         Toast.makeText(getBaseContext(), "you don't have a reservation", Toast.LENGTH_SHORT).show();
                     }
+
+                    user.setReservationNumber(0);
+                    user.setReservationLocation("");
+
+                    UserDatabase db = WelcomeActivity.getDb();
+                    db.userDao().updateUsers(user);
+                    WelcomeActivity.setDb(db);
+
                 } catch (NullPointerException e) {
                     txtc.setText("You done messed up now");
                 }
@@ -193,6 +199,7 @@ public class SingleListItem extends Activity {
                 extras.putString("gender", filterGender );
                 extras.putString("age", filterAge);
                 extras.putString("name", filterName);
+                extras.putString("username", username);
 
                 // add bundle to intent
                 intent.putExtras(extras);

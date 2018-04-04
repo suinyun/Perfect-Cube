@@ -39,15 +39,17 @@ public class WelcomeActivity extends AppCompatActivity {
         //and that it's a better idea to create one instance and use it everywhere,
         //so I created the database in the Welcome Activity (at startup)
 
-        InputStream inputStream = getResources().openRawResource(R.raw.data);
-        CsvFileReader csvFile = new CsvFileReader(inputStream);
-        List<ShelterInfo> rawShelterList = csvFile.read();
-        ShelterDatabase sdb = WelcomeActivity.getSdb();
-        int length = rawShelterList.size();
-        for (int i = 0; i < length; i++) {
-            sdb.shelterDao().insertShelters(rawShelterList.get(i));
+        if (ShelterInfo.needsToRead()) {
+            InputStream inputStream = getResources().openRawResource(R.raw.data);
+            CsvFileReader csvFile = new CsvFileReader(inputStream);
+            List<ShelterInfo> rawShelterList = csvFile.read();
+            ShelterDatabase sdb = WelcomeActivity.getSdb();
+            int length = rawShelterList.size();
+            for (int i = 0; i < length; i++) {
+                sdb.shelterDao().insertShelters(rawShelterList.get(i));
+            }
+            WelcomeActivity.setSdb(sdb);
         }
-        WelcomeActivity.setSdb(sdb);
 
         Button loginButton = (Button) findViewById(R.id.loginButton);
         Button registerButton = (Button) findViewById(R.id.registerButton);

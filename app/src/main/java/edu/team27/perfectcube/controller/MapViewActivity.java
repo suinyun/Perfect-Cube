@@ -6,6 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+
 import edu.team27.perfectcube.R;
 
 /**
@@ -34,7 +38,6 @@ public class MapViewActivity extends Fragment {
         return inflater.inflate(R.layout.activity_mapview, container, false);
     }
 
-    @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
 

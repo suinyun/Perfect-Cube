@@ -9,7 +9,7 @@ import android.content.Context;
  * Created by Brooklyn on 3/27/2018.
  */
 
-@Database(entities = {ShelterInfo.class}, version = 1, exportSchema = false)
+@Database(entities = {ShelterInfo.class}, version = 2, exportSchema = false)
 public abstract class ShelterDatabase extends RoomDatabase {
 
     public static ShelterDatabase INSTANCE;

@@ -44,8 +44,8 @@ public class CsvFileReader {
 
                     //Create a new student object and fill his  data
                     ShelterInfo shelter = new ShelterInfo(tokens[1], tokens[2],
-                            tokens[3], address[1], //(tokens[6] + "\n" + tokens[7] + tokens[8]),
-                            tokens[tokens.length - 1]);
+                            tokens[3],Double.parseDouble(tokens[4]), Double.parseDouble(tokens[5]),
+                            address[1], tokens[7]); //(tokens[6] + "\n" + tokens[7] + tokens[8]),
                     shelters.add(shelter);
                 }
                 line = fileReader.readLine();

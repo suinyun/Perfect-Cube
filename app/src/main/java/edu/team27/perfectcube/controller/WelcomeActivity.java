@@ -34,6 +34,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 .build();
         sdb = Room.databaseBuilder(getApplicationContext(),
                 ShelterDatabase.class, "shelter-database")
+                .fallbackToDestructiveMigration()
                 .allowMainThreadQueries().build();
         //From what I read, it was a bad idea to use the getInstance method,
         //and that it's a better idea to create one instance and use it everywhere,

@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -44,6 +45,7 @@ public class WelcomeActivity extends AppCompatActivity {
             InputStream inputStream = getResources().openRawResource(R.raw.data);
             CsvFileReader csvFile = new CsvFileReader(inputStream);
             List<ShelterInfo> rawShelterList = csvFile.read();
+            Log.d("Shelters::", rawShelterList.toString());
             ShelterDatabase sdb = WelcomeActivity.getSdb();
             int length = rawShelterList.size();
             for (int i = 0; i < length; i++) {

@@ -47,10 +47,10 @@ public class WelcomeActivity extends AppCompatActivity {
             List<ShelterInfo> rawShelterList = csvFile.read();
             Log.d("Shelters::", rawShelterList.toString());
             ShelterDatabase sdb = WelcomeActivity.getSdb();
-            int length = rawShelterList.size();
-            for (int i = 0; i < length; i++) {
-                sdb.shelterDao().insertShelters(rawShelterList.get(i));
-            }
+            //int length = rawShelterList.size();
+            //for (int i = 0; i < length; i++) {
+                sdb.shelterDao().insertShelters(rawShelterList.toArray(new ShelterInfo[12]));
+            //}
             WelcomeActivity.setSdb(sdb);
         }
 

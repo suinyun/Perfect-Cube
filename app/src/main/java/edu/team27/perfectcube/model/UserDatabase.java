@@ -17,4 +17,8 @@ public abstract class UserDatabase extends RoomDatabase{
     public static UserDatabase INSTANCE;
 
     public abstract UserDao userDao();
+
+    public UserDao getUserDao() {
+        return userDao();
+    }
 }

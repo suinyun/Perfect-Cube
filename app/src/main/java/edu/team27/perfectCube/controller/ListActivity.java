@@ -70,6 +70,8 @@ public class ListActivity extends Activity {
                 if (g.contains("Male")) {
                     addShelter = false;
                 }
+            } else {
+                addShelter = true;
             }
 
             if ("Families with Newborns".equals(filterAge)) {
@@ -84,11 +86,15 @@ public class ListActivity extends Activity {
                 if (!g.contains("oung adults") && !g.contains("nyone")) {
                     addShelter = false;
                 }
+            } else {
+                addShelter = true;
             }
 
             if (!"".equals(filterName)) {
                 if (!n.contains(filterName)) {
                     addShelter = false;
+                } else {
+                    addShelter = true;
                 }
             }
 

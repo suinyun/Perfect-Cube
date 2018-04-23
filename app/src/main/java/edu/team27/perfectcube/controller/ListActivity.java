@@ -18,6 +18,7 @@ import edu.team27.perfectcube.R;
 import edu.team27.perfectcube.model.ShelterDatabase;
 import edu.team27.perfectcube.model.ShelterInfo;
 
+
 public class ListActivity extends Activity {
 
     private ListView lv;
@@ -58,6 +59,8 @@ public class ListActivity extends Activity {
                 if (rawShelterList.get(i).getGender().contains("Men")) {
                     addShelter = false;
                 }
+            } else {
+                addShelter = true;
             }
 
             if (filterA.equals("Families with Newborns")) {
@@ -72,6 +75,8 @@ public class ListActivity extends Activity {
                 if (!rawShelterList.get(i).getGender().contains("Young adults") && !rawShelterList.get(i).getGender().contains("nyone")) {
                     addShelter = false;
                 }
+            } else {
+                addShelter = true;
             }
 
             if (!filterN.isEmpty()) {

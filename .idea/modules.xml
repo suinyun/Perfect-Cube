@@ -3,11 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Perfect-Cube.iml" filepath="$PROJECT_DIR$/Perfect-Cube.iml" />
-      <module fileurl="file://C:\Users\Robert\Documents\CS 2340\PerfectCube\Perfect-Cube.iml" filepath="C:\Users\Robert\Documents\CS 2340\PerfectCube\Perfect-Cube.iml" />
-      <module fileurl="file://C:\Users\emmad\cs2340\m8\Perfect-Cube\PerfectCube.iml" filepath="C:\Users\emmad\cs2340\m8\Perfect-Cube\PerfectCube.iml" />
-      <module fileurl="file://C:\Users\Brooklyn\Desktop\CS 2340\M8\Perfect-Cube\PerfectCube.iml" filepath="C:\Users\Brooklyn\Desktop\CS 2340\M8\Perfect-Cube\PerfectCube.iml" />
-      <module fileurl="file://C:\Users\Brooklyn\Desktop\CS 2340\M9\Perfect-Cube\PerfectCube.iml" filepath="C:\Users\Brooklyn\Desktop\CS 2340\M9\Perfect-Cube\PerfectCube.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Brooklyn\Desktop\CS 2340\M9\Perfect-Cube\perfectcube.iml" filepath="C:\Users\Brooklyn\Desktop\CS 2340\M9\Perfect-Cube\perfectcube.iml" />
     </modules>
   </component>
 </project>

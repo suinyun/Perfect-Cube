@@ -4,7 +4,7 @@
 
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/namelist_layout"
+        android:id="@+id/name_list_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView" />

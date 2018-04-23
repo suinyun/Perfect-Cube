@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "edu.team27.perfectcube"
+        applicationId "edu.team27.perfectCube"
         minSdkVersion 21
         multiDexEnabled true
         targetSdkVersion 26

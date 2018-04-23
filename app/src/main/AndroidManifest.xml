@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.team27.perfectcube">
+    package="edu.team27.perfectCube">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -15,37 +15,39 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".controller.WelcomeActivity">
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor">
+        <activity android:name="edu.team27.perfectCube.controller.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.LoginActivity" />
-        <activity android:name=".controller.RegisterActivity" />
-        <activity android:name=".controller.ListActivity" />
+        <activity android:name="edu.team27.perfectCube.controller.LoginActivity" />
+        <activity android:name="edu.team27.perfectCube.controller.RegisterActivity" />
+        <activity android:name="edu.team27.perfectCube.controller.ListActivity" />
         <activity
-            android:name=".controller.SingleListItem"
+            android:name="edu.team27.perfectCube.controller.SingleListItem"
             android:label="Single Item Selected" />
-        <activity android:name=".controller.SearchActivity" />
-        <activity android:name=".controller.ReservationActivity" />
+        <activity android:name="edu.team27.perfectCube.controller.SearchActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
              Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+             You need a different API key for each encryption key, including the release
+             key that is used to sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/
+             and src/release/.
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA0ClMU396RbjOJ7753m9Ichp1bfYBCz_k" />
 
         <activity
-            android:name=".controller.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:name="edu.team27.perfectCube.controller.MapsActivity"
+            android:label="@string/title_activity_maps"
+            ></activity>
     </application>
 
 </manifest>

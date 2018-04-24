@@ -1,6 +1,8 @@
 package edu.team27.perfectCube.controller;
 
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ class CsvFileReader {
             while (line != null) {
 
                 //Get all tokens available in line
-
+Log.d("APP", "Got line: " + line );
                 String secondLine = line;
                 String[] tokens = line.split(",");
                 String[] address = secondLine.split("\"");

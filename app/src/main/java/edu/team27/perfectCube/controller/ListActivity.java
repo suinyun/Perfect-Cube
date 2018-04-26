@@ -173,6 +173,15 @@ public class ListActivity extends Activity {
             }
         });
 
+        Button mapButton = findViewById(R.id.mapButton);
 
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(intent);
+
+            }
+        });
     }
 }

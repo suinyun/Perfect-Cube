@@ -2,34 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/lightGrey">
 
-    <TextView android:id="@+id/shelter_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/shelter_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="30dp"         />
 
     <TextView android:id="@+id/capacity"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
     <TextView android:id="@+id/gender"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
     <TextView android:id="@+id/address"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
     <TextView android:id="@+id/phone_number"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/bedCountText"
         android:labelFor="@+id/bedCount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="How many beds do you wish to reserve?" />
+        android:text="How many beds do you wish to reserve?"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/bedCount"
@@ -41,18 +55,24 @@
         android:id="@+id/reservationButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Make a Reservation" />
+        android:text="Make a Reservation"
+        android:background="@color/colorAccent"
+        android:layout_marginBottom="5dp"/>
 
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cancel Your Reservation"/>
+        android:text="Cancel Your Reservation"
+        android:background="@color/colorAccent"
+        android:layout_marginBottom="5dp"/>
 
     <Button
         android:id="@+id/backButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Go back" />
+        android:text="Go back"
+        android:background="@color/colorAccent"
+        android:layout_marginBottom="5dp"/>
 
 </LinearLayout>

@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Button loginButton = findViewById(R.id.loginButton);
         Button cancelButton = findViewById(R.id.cancelButton);
+        Button forgotButton = findViewById(R.id.forgotButton);
         username = findViewById(R.id.usernameText);
         password = findViewById(R.id.passwordText);
         warning1 = findViewById(R.id.warning1);
@@ -68,8 +69,8 @@ public class LoginActivity extends AppCompatActivity {
                         //text exists in both fields
                         warning1.setVisibility(View.GONE);
                         if (LoginData.findUser(tryUser)) {
-                            String pass = LoginData.getPass(tryUser);
-                            if (pass.equals(tryPass)) {
+                            Boolean match = LoginData.comparePass(tryUser, tryPass);
+                            if (match) {
                                 //login is successful
                                 Intent intent = new Intent(a, ListActivity.class);
                                 Bundle extras = new Bundle();
@@ -91,6 +92,10 @@ public class LoginActivity extends AppCompatActivity {
                                     // new error message
                                     warning2.setVisibility(View.GONE);
                                     fraud = true;
+
+                                    Intent intent = new Intent(a, FraudActivity.class);
+                                    startActivity(intent);
+
                                 } else {
                                     warning2.setVisibility(View.VISIBLE);
                                 }
@@ -111,6 +116,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(a, WelcomeActivity.class);
+                startActivity(intent);
+            }
+
+        });
+
+        forgotButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(a, RecoveryActivity.class);
                 startActivity(intent);
             }
 

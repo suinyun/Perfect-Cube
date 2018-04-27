@@ -31,6 +31,8 @@
             android:name="edu.team27.perfectCube.controller.SingleListItem"
             android:label="Single Item Selected" />
         <activity android:name="edu.team27.perfectCube.controller.SearchActivity" />
+        <activity android:name="edu.team27.perfectCube.controller.FraudActivity" />
+        <activity android:name="edu.team27.perfectCube.controller.RecoveryActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

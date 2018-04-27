@@ -61,19 +61,19 @@ public class LoginData {
      * gets a user's password
      *
      * @param name the username whose password you need
-     * @return the password
+     * @return whether or not the password is a match
      * */
-    public static String getPass(String name) {
-        int length = userInfo.size();
-        String pass = "";
-        for (int i = 0; i < length; i++) {
-            User x = userInfo.get(i);
-            String u = x.getUsername();
+    public static Boolean comparePass(String name, String pass) {
+        boolean match = false;
+        for (User user : userInfo) {
+            String u = user.getUsername();
             if (u.equals(name)) {
-                pass = x.getPassword();
+                if (pass.equals(user.getPassword())) {
+                    match = true;
+                }
             }
         }
-        return pass;
+        return match;
     }
 
     /**

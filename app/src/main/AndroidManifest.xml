@@ -44,7 +44,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA0ClMU396RbjOJ7753m9Ichp1bfYBCz_k" />
+            android:value="AIzaSyCM9HCpjl4qexDoXbmCr2MVGMHbPnUqmqQ" />
 
         <activity
             android:name="edu.team27.perfectCube.controller.MapsActivity"
